@@ -34,7 +34,8 @@ namespace ProxyApp
         {
             dgvBlocked.DataSource = null;
             dgvBlocked.Rows.Clear();
-            dgvBlocked.DataSource = Proxy.GetBlockedSites();
+            List<WebsiteDTO> list = Proxy.GetBlockedSites();
+            dgvBlocked.DataSource = list;
             dgvBlocked.ClearSelection();
             dgvBlocked.CurrentCell = null;
         }

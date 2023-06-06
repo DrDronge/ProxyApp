@@ -1,4 +1,1 @@
-google.com, 142.250.184.206, what the hell
-www.youtube.com, 142.250.185.238, Ingen kategori angivet
-runescape.com, 91.235.140.148, Ingen kategori angivet
-rs.wiki, 172.67.155.221, Ingen kategori angivet
+google.com,Ingen kategori angivet,142.250.184.238

@@ -73,7 +73,13 @@ namespace ProxyApp.App
 
         public override string ToString()
         {
-            return $"{DomainName}, {Ip[0]}, {Category}";
+            string result = $"{DomainName},{Category}";
+            for (int i = 0; i < Ip.Count(); i++)
+            {
+               result += $",{Ip[i]}";
+            }
+
+            return result;
         }
     }
 }

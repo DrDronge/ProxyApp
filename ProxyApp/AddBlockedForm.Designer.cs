@@ -35,6 +35,7 @@
             this.categoryTextBox = new System.Windows.Forms.TextBox();
             this.AddBlockedAdd = new System.Windows.Forms.Button();
             this.AddBlockedCancel = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
             // DomainName
@@ -105,6 +106,16 @@
             this.AddBlockedCancel.UseVisualStyleBackColor = true;
             this.AddBlockedCancel.Click += new System.EventHandler(this.AddBlockedCancel_Click);
             // 
+            // panel1
+            // 
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(286, 23);
+            this.panel1.TabIndex = 8;
+            this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
+            this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
+            this.panel1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseUp);
+            // 
             // AddBlockedForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -118,6 +129,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.domainNameTextBox);
             this.Controls.Add(this.DomainName);
+            this.Controls.Add(this.panel1);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "AddBlockedForm";
@@ -137,5 +149,6 @@
         private System.Windows.Forms.TextBox categoryTextBox;
         private System.Windows.Forms.Button AddBlockedAdd;
         private System.Windows.Forms.Button AddBlockedCancel;
+        private System.Windows.Forms.Panel panel1;
     }
 }

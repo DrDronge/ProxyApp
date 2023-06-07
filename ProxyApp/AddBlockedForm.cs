@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -13,6 +14,9 @@ namespace ProxyApp
 {
     public partial class AddBlockedForm : Form
     {
+        int MouseX, MouseY;
+        bool MousePressed;
+        int MouseInX, MouseInY;
         public AddBlockedForm()
         {
             InitializeComponent();
@@ -51,6 +55,29 @@ namespace ProxyApp
             }
             this.Close();
 
+        }
+
+        private void panel1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (MousePressed)
+            {
+                MouseX = MousePosition.X - MouseInX;
+                MouseY = MousePosition.Y - MouseInY;
+
+                this.SetDesktopLocation(MouseX, MouseY);
+            }
+        }
+
+        private void panel1_MouseUp(object sender, MouseEventArgs e)
+        {
+            MousePressed = false;
+        }
+
+        private void panel1_MouseDown(object sender, MouseEventArgs e)
+        {
+            MouseInX = MousePosition.X - Bounds.X;
+            MouseInY = MousePosition.Y - Bounds.Y;
+            MousePressed = true;
         }
     }
 }

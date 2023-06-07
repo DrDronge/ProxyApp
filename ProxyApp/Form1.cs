@@ -13,6 +13,9 @@ namespace ProxyApp
 {
     public partial class MainWindow : Form
     {
+        int MouseX = 0, MouseY = 0;
+        int MouseInX, MouseInY;
+        bool MousePressed = false;
         
         public MainWindow()
         {
@@ -42,12 +45,19 @@ namespace ProxyApp
 
         private void button2_Click(object sender, EventArgs e)
         {
-            int rowIndex = dgvBlocked.CurrentCell.RowIndex;
-            if (rowIndex >= 0)
+            try
             {
-            Proxy.RemoveWebsite(rowIndex);
+                int rowIndex = dgvBlocked.CurrentCell.RowIndex;
+                if (rowIndex >= 0)
+                {
+                    Proxy.RemoveWebsite(rowIndex);
+                }
+                RefreshList();
             }
-            RefreshList();
+            catch
+            {
+                MessageBox.Show("Vælg en hjemmeside før du kan fjerne den");
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -64,6 +74,40 @@ namespace ProxyApp
         private void button3_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void panel2_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (MousePressed)
+            {
+                MouseX = MousePosition.X - MouseInX;
+                MouseY = MousePosition.Y - MouseInY;
+
+                this.SetDesktopLocation(MouseX, MouseY);
+            }
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)
+            {
+                Proxy.StartProxyListener();
+            }else if (!checkBox1.Checked)
+            {
+                Proxy.StopProxyListener();
+            }
+        }
+
+        private void panel2_MouseUp(object sender, MouseEventArgs e)
+        {
+            MousePressed = false;
+        }
+
+        private void panel2_MouseDown(object sender, MouseEventArgs e)
+        {
+            MouseInX = MousePosition.X - Bounds.X;
+            MouseInY = MousePosition.Y - Bounds.Y;
+            MousePressed = true;
         }
     }
 }

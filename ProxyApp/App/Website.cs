@@ -76,7 +76,7 @@ namespace ProxyApp.App
             string result = $"{DomainName},{Category}";
             for (int i = 0; i < Ip.Count(); i++)
             {
-               result += $",{Ip[i]}";
+                result += $",{Ip[i]}";
             }
 
             return result;

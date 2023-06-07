@@ -14,7 +14,7 @@ namespace ProxyApp.App
     static class Proxy
     {
         static Website website = new Website();
-
+        public static List<Website> BlockedSites = new List<Website>();
         public static List<Website> ReadCsvFile(string path)
         {
             List<Website> list = new List<Website>();
@@ -41,21 +41,25 @@ namespace ProxyApp.App
         }
         public static void AddNewWebsite(string domainName)
         {
-            List <Website> list = new List<Website>();
+            BlockedSites.Clear();
+            BlockedSites = Proxy.GetBlockedSitesWithIps();
             Website w = website.NewWebsite(domainName);
-            list.ToTextFile<Website>();
+            BlockedSites.Add(w);
+            BlockedSites.ToTextFile<Website>();
         }
 
         public static void AddNewWebsite(string domainName, string category)
         {
-            List<Website> list = new List<Website>();
+            BlockedSites.Clear();
+            BlockedSites = Proxy.GetBlockedSitesWithIps();
             Website w = website.NewWebsite(domainName, category);
-            list.ToTextFile<Website>();
+            BlockedSites.Add(w);
+            BlockedSites.ToTextFile<Website>();
         }
 
         public static void RemoveWebsite(int i)
         {
-            string path = "...\\ProxyApp\\App\\Blocked.txt";
+            string path = @".\\Blocked.txt";
             if (File.Exists(path))
             {
                 List<Website> list = ReadCsvFile(path);
@@ -70,7 +74,7 @@ namespace ProxyApp.App
         public static List<WebsiteDTO> GetBlockedSites()
         {
             List<WebsiteDTO> webSiteNames = new List<WebsiteDTO>();
-            string path = "...\\ProxyApp\\App\\Blocked.txt";
+            string path = @".\\Blocked.txt";
             if (File.Exists(path)){
                 List<Website> blockedTxt = ReadCsvFile(path);
                 foreach (Website website in blockedTxt)
@@ -85,6 +89,24 @@ namespace ProxyApp.App
            
             return webSiteNames;
         }
+        public static List<Website> GetBlockedSitesWithIps()
+        {
+            List<Website> webSiteNames = new List<Website>();
+            string path = @".\\Blocked.txt";
+            if (File.Exists(path))
+            {
+                List<Website> blockedTxt = ReadCsvFile(path);
+                foreach (Website website in blockedTxt)
+                {
+                    if (website != null)
+                    {
+                        Website websites = new Website(website.DomainName, website.Category);
+                        webSiteNames.Add(websites);
+                    }
+                }
+            }
 
+            return webSiteNames;
+        }
     }
 }

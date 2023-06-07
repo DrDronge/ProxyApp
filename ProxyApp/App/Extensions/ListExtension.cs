@@ -12,7 +12,7 @@ namespace ProxyApp.App.Extensions
     {
         public static void ToTextFile<T>(this List<T> list)
         { 
-            using(TextWriter tw = new StreamWriter("...\\ProxyApp\\App\\Blocked.txt"))
+            using(TextWriter tw = new StreamWriter(@".\\Blocked.txt"))
             {
                 for(int i = 0; i < list.Count; i++)
                 {
